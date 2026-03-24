@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eisbären – Faszinierende Jäger der Arktis</title>
+    <style>
+      :root {
+        --bg: #07111a;
+        --bg-soft: rgba(255, 255, 255, 0.04);
+        --bg-card: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.1);
+        --text: #ffffff;
+        --muted: #b9c4cf;
+        --muted-2: #8ea0b3;
+        --accent: #b8f3ff;
+        --accent-strong: #7dd3fc;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --container: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Inter, Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(125, 211, 252, 0.14), transparent 30%),
+          radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.08), transparent 18%),
+          linear-gradient(180deg, #07111a 0%, #07111a 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(16px);
+        background: rgba(7, 17, 26, 0.78);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .navbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 0;
+        gap: 20px;
+      }
+
+      .brand small {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--accent);
+        font-size: 11px;
+        margin-bottom: 4px;
+      }
+
+      .brand strong {
+        font-size: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .hero {
+        padding: 72px 0 48px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(184, 243, 255, 0.18);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 7vw, 76px);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+      }
+
+      .hero h1 span {
+        display: block;
+        margin-top: 10px;
+        color: var(--accent);
+      }
+
+      .hero p {
+        margin-top: 22px;
+        max-width: 700px;
+        font-size: 18px;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        padding: 14px 20px;
+        border-radius: 18px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid transparent;
+        transition: 0.25s ease;
+      }
+
+      .btn-primary {
+        background: white;
+        color: #07111a;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--border);
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .hero-card {
+        position: relative;
+        padding: 14px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card img {
+        width: 100%;
+        height: 520px;
+        object-fit: cover;
+        border-radius: 24px;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        left: 28px;
+        right: 28px;
+        bottom: 28px;
+        padding: 22px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.38);
+        backdrop-filter: blur(12px);
+      }
+
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 11px;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .hero-overlay h2 {
+        font-size: 30px;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+
+      .hero-overlay p {
+        color: #d8e1ea;
+        font-size: 14px;
+        margin: 0;
+      }
+
+      section {
+        padding: 28px 0;
+      }
+
+      .stats {
+        padding-top: 34px;
+      }
+
+      .stats-grid,
+      .facts-grid,
+      .gallery-grid,
+      .zoos-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .facts-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .gallery-grid,
+      .zoos-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+      }
+
+      .card.soft {
+        background: var(--bg-soft);
+      }
+
+      .card h3 {
+        font-size: 24px;
+        line-height: 1.15;
+        margin-bottom: 14px;
+      }
+
+      .card p,
+      .section-copy {
+        color: var(--muted);
+      }
+
+      .stat-label {
+        color: var(--muted-2);
+        font-size: 14px;
+      }
+
+      .stat-value {
+        margin-top: 10px;
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .section-head {
+        max-width: 760px;
+        margin-bottom: 24px;
+      }
+
+      .section-head h2 {
+        margin-top: 10px;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .section-head p {
+        margin-top: 12px;
+        color: var(--muted);
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .split-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+      }
+
+      .gif-box {
+        overflow: hidden;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        min-height: 340px;
+      }
+
+      .gif-box img {
+        width: 100%;
+        height: 100%;
+        min-height: 340px;
+        object-fit: cover;
+      }
+
+      .gallery-item {
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        transition: 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .gallery-caption {
+        padding: 14px 16px 18px;
+        color: var(--muted-2);
+        font-size: 14px;
+      }
+
+      .zoos-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .zoo-card {
+        padding: 20px;
+        border-radius: 22px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: #e7edf4;
+        transition: 0.25s ease;
+      }
+
+      .zoo-card:hover {
+        background: rgba(255, 255, 255, 0.07);
+        transform: translateY(-2px);
+      }
+
+      footer {
+        margin-top: 16px;
+        padding: 36px 0 56px;
+        border-top: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        align-items: end;
+      }
+
+      .footer-tag {
+        padding: 14px 18px;
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.28);
+        border: 1px solid var(--border);
+        color: var(--muted-2);
+        font-size: 14px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1100px) {
+        .hero-grid,
+        .facts-grid,
+        .stats-grid,
+        .gallery-grid,
+        .zoos-grid,
+        .info-grid,
+        .split-grid,
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .zoos-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 52px;
+        }
+
+        .stats-grid,
+        .facts-grid,
+        .gallery-grid,
+        .zoos-grid,
+        .info-grid,
+        .split-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-card img {
+          height: 360px;
+        }
+
+        .hero-overlay {
+          left: 18px;
+          right: 18px;
+          bottom: 18px;
+          padding: 18px;
+        }
+
+        .hero-overlay h2 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container navbar-inner">
+        <div class="brand">
+          <small>Polar World</small>
+          <strong>Eisbären</strong>
+        </div>
+        <div class="nav-links">
+          <a href="#fakten">Fakten</a>
+          <a href="#bestand">Bestand</a>
+          <a href="#galerie">Galerie</a>
+          <a href="#zoos">Zoos</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="pill">Minimal • Professionell • Informativ</div>
+          <h1>
+            Eisbären
+            <span>Faszinierende Jäger der Arktis</span>
+          </h1>
+          <p>
+            Diese Website zeigt die wichtigsten Informationen über Eisbären: ihren Lebensraum,
+            ihre Ernährung, ihre Fortpflanzung, ihre Bestände und die aktuelle Lage ihres bedrohten
+            Lebensraums – in einem modernen, ruhigen und professionellen Stil.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#fakten">Jetzt entdecken</a>
+            <a class="btn btn-secondary" href="#zoos">Deutsche Zoos</a>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <img
+            src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=1400&q=80"
+            alt="Eisbär auf einer Eisfläche"
+          />
+          <div class="hero-overlay">
+            <div class="eyebrow">Ursus maritimus</div>
+            <h2>Perfekt an Eis angepasst</h2>
+            <p>Doch ohne Meereis verliert der Eisbär seine wichtigste Lebensgrundlage.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="stats" id="fakten">
+      <div class="container stats-grid">
+        <div class="card reveal">
+          <div class="stat-label">Weltweite Bestände</div>
+          <div class="stat-value">ca. 22.000–31.000</div>
+        </div>
+        <div class="card reveal">
+          <div class="stat-label">Status</div>
+          <div class="stat-value">Gefährdet</div>
+        </div>
+        <div class="card reveal">
+          <div class="stat-label">Teilpopulationen</div>
+          <div class="stat-value">19</div>
+        </div>
+        <div class="card reveal">
+          <div class="stat-label">Hauptproblem</div>
+          <div class="stat-value">Meereisverlust</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Fachliche Infos</div>
+          <h2>Die wichtigsten Fakten auf einen Blick</h2>
+        </div>
+
+        <div class="facts-grid">
+          <article class="card soft reveal">
+            <h3>Lebensraum</h3>
+            <p>
+              Eisbären leben rund um die Arktis – vor allem in Alaska, Kanada, Grönland,
+              Svalbard/Norwegen und Russland. Ihr wichtigster Lebensraum ist das Meereis.
+            </p>
+          </article>
+
+          <article class="card soft reveal">
+            <h3>Alter</h3>
+            <p>
+              In freier Wildbahn werden Eisbären meist etwa 15 bis 18 Jahre alt. In Zoos
+              können einzelne Tiere deutlich älter werden.
+            </p>
+          </article>
+
+          <article class="card soft reveal">
+            <h3>Paarungszeit</h3>
+            <p>
+              Die Paarungszeit liegt überwiegend zwischen April und Mai. Die Jungen werden
+              dank verzögerter Einnistung im Winter geboren.
+            </p>
+          </article>
+
+          <article class="card soft reveal">
+            <h3>Nahrung</h3>
+            <p>
+              Eisbären ernähren sich vor allem von Robben, besonders Ringelrobben und
+              Bartrobben. Sie jagen meist direkt am oder auf dem Eis.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="bestand">
+      <div class="container info-grid">
+        <article class="card reveal">
+          <div class="eyebrow">Bestand</div>
+          <h3>Wie viele Eisbären existieren noch?</h3>
+          <p class="section-copy">
+            Weltweit wird der Bestand auf ungefähr <strong>22.000 bis 31.000 Tiere</strong>
+            geschätzt. Damit zählt der Eisbär zwar noch nicht zu den seltensten Großraubtieren,
+            aber seine Zukunft gilt als unsicher.
+          </p>
+          <p class="section-copy" style="margin-top: 16px;">
+            Entscheidend ist vor allem die Entwicklung des arktischen Eises: Wenn das Eis früher
+            schmilzt und später zurückkehrt, verlieren Eisbären wertvolle Jagdzeit und damit Energie.
+          </p>
+        </article>
+
+        <article class="card reveal" style="background: linear-gradient(135deg, rgba(125, 211, 252, 0.1), rgba(255, 255, 255, 0.03));">
+          <div class="eyebrow">Lebensraumlage</div>
+          <h3>Wie steht es um ihren Lebensraum?</h3>
+          <p class="section-copy">
+            Der Lebensraum des Eisbären ist eng mit dem arktischen Meereis verbunden. Dort jagt er,
+            wandert weite Strecken und ruht sich aus. Durch den Klimawandel nimmt diese Eisfläche ab.
+          </p>
+          <p class="section-copy" style="margin-top: 16px;">
+            Weniger Eis bedeutet längere Hungerzeiten, schwierigere Jagdbedingungen und geringere Chancen
+            für Jungtiere zu überleben. Genau deshalb gilt die Lebensraumlage als kritisch.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container split-grid">
+        <div class="gif-box reveal">
+          <img
+            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW1nY2YxNXQ3czFwMnQ4NmRkeW1ocmJvOHB5aW5iZHdveHNkNm8yeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xTiTnHvXHHxOTcdmxO/giphy.gif"
+            alt="Eisbär GIF"
+          />
+        </div>
+
+        <article class="card reveal">
+          <div class="eyebrow">Besonders interessant</div>
+          <h3>Warum Eisbären so beeindruckend sind</h3>
+          <p class="section-copy">
+            Eisbären sind ausgezeichnete Schwimmer, können weite Strecken zurücklegen und besitzen eine dicke
+            Fettschicht sowie dichtes Fell gegen die extreme Kälte der Arktis.
+          </p>
+          <p class="section-copy" style="margin-top: 16px;">
+            Trotz ihrer Größe und Stärke sind sie hochspezialisiert. Gerade diese Spezialisierung macht sie jedoch
+            anfällig, wenn ihr Lebensraum verschwindet.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="galerie">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Galerie</div>
+          <h2>Passende Bilder im minimalistischen Stil</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item reveal">
+            <img
+              src="https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=1400&q=80"
+              alt="Eisbär auf Eis"
+            />
+            <div class="gallery-caption">Motiv 1 • Arktische Atmosphäre</div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <img
+              src="https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1200&q=80"
+              alt="Eisbär im Schnee"
+            />
+            <div class="gallery-caption">Motiv 2 • Kalte Landschaft</div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <img
+              src="https://images.unsplash.com/photo-1575550959106-5a7defe28b56?auto=format&fit=crop&w=1200&q=80"
+              alt="Arktische Landschaft"
+            />
+            <div class="gallery-caption">Motiv 3 • Weite des Nordens</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zoos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Deutschland</div>
+          <h2>In welchen deutschen Zoos gibt es Eisbären?</h2>
+          <p>Hier ist eine kompakte Übersicht bekannter deutscher Zoos, in denen Eisbären zu finden sind.</p>
+        </div>
+
+        <div class="zoos-grid">
+          <div class="zoo-card reveal">Zoo Berlin</div>
+          <div class="zoo-card reveal">Tierpark Berlin</div>
+          <div class="zoo-card reveal">Tiergarten Nürnberg</div>
+          <div class="zoo-card reveal">Zoo Rostock</div>
+          <div class="zoo-card reveal">ZOOM Erlebniswelt Gelsenkirchen</div>
+          <div class="zoo-card reveal">Erlebnis-Zoo Hannover</div>
+          <div class="zoo-card reveal">Zoologischer Stadtgarten Karlsruhe</div>
+          <div class="zoo-card reveal">Zoo am Meer Bremerhaven</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-grid">
+        <div class="reveal">
+          <div class="eyebrow">Fazit</div>
+          <h2 style="font-size: clamp(30px, 4vw, 46px); line-height: 1.05; letter-spacing: -0.04em;">
+            Stark, elegant und bedroht
+          </h2>
+          <p style="margin-top: 14px; max-width: 760px; color: var(--muted);">
+            Eisbären sind eines der bekanntesten Symbole der Arktis. Ihre Zukunft hängt direkt davon ab,
+            ob ihr eisiger Lebensraum erhalten bleibt. Diese Website verbindet sachliche Informationen mit
+            einem modernen und passenden Design.
+          </p>
+        </div>
+        <div class="footer-tag reveal">Designstil: minimalistisch • professionell • arktisch</div>
+      </div>
+    </footer>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    </script>
+  </body>
+</html>
